@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>RPS</title>
+</head>
+
+<body>
+<script>
+
+	let round = 1;
+	let rawInput = "";
+	let pNumInput;
+	let cNumInput;
+	let compText = "";
+	let playerWins = 0;
+	let computerWins = 0;
+
+	game();
+
+	function game()
+		{
+			while(round<=5)
+			{
+				determineWinner(getInput(),computerPlay());
+				round = round +1;
+			}
+			if (playerWins==computerWins)
+				{
+					alert("Game Over, nobody wins! Final Score after " + (round-1) + " rounds: You - " + playerWins + ", Me - " + computerWins);
+				}
+			else if (playerWins > computerWins)
+				{
+					 alert("Game Over, you win! Final Score after " + (round-1) + " rounds: You - " + playerWins + ", Me - " + computerWins);
+				}
+			else
+				{
+				alert("Game Over, I win! Final Score after " + (round-1) + " rounds: You - " + playerWins + ", Me - " + computerWins);
+				}
+		}
+
+	function getInput()
+	{
+		let valid = false;
+		while (valid===false)
+		{
+			rawInput = prompt("Rock, Paper, or Scissors?:");
+			pNumInput = choiceToNum(rawInput.toLowerCase());
+			(pNumInput==0)?valid=false:valid=true;
+		}
+
+		return pNumInput;
+	}
+
+	function computerPlay()
+	{
+		cNumInput = Math.floor(Math.random() * 3)+1;
+		compText = numToChoice(cNumInput);
+		return cNumInput;
+	}
+
+	function determineWinner (playerChoice,computerChoice){
+		let choices = playerChoice+computerChoice;
+		if (playerChoice==computerChoice){
+			alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". Nobody wins this round.");
+		}
+		else if (choices == 3){
+			if (playerChoice==2)
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". You win this round!");
+					playerWins = playerWins +1;
+				}
+			else
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". I win this round!");
+					computerWins = computerWins +1;
+				}
+		}
+		else if (choices == 4){
+			if (playerChoice==1)
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". You win this round!");
+					playerWins = playerWins +1;
+				}
+			else
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". I win this round!");
+					computerWins = computerWins +1;
+				}
+	 	}
+		else if (choices == 5){
+			if (playerChoice==3)
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". You win this round!");
+					playerWins = playerWins +1;
+				}
+			else
+				{
+					alert ("Round: " + round + ". You chose " + rawInput + ", I chose " + compText + ". I win this round!");
+					computerWins = computerWins +1;
+					round = round +1;
+				}
+		}
+		else {
+			alert ("an error has occurred!");
+
+		}
+	}
+
+	function choiceToNum (choice = "invalid") {
+		let choiceNum = 0;
+
+		if (choice.trim() == "rock")
+			{
+				choiceNum=1;
+			}
+		else if (choice.trim() == "paper")
+			{
+				choiceNum=2;
+			}
+		else if (choice.trim() == "scissors")
+			{
+				choiceNum=3;
+			}
+		else
+			{
+				break;
+			}
+
+		return choiceNum;
+	}
+
+	function numToChoice(choiceNum)
+		{
+			let choice = "";
+			if (choiceNum ==1)
+				{
+					choice = "Rock";
+				}
+			else if (choiceNum == 2)
+				{
+					choice = "Paper";
+				}
+			else if (choiceNum == 3)
+				{
+					choice = "Scissors";
+				}
+			return choice;
+		}
+
+	</script>
+</body>
+</html>
